@@ -1,0 +1,14 @@
+# Last updated: 7/3/2026, 12:49:40 PM
+class Solution:
+    def minOperations(self, nums: List[int], k: int) -> int:
+        ans = 0
+        minHeap = nums.copy()
+        heapq.heapify(minHeap)
+
+        while len(minHeap) > 1 and minHeap[0] < k:
+            x = heapq.heappop(minHeap)
+            y = heapq.heappop(minHeap)
+            heapq.heappush(minHeap, min(x, y) * 2 + max(x, y))
+            ans += 1
+
+        return ans
